@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: jareds_new_todo_project_production
-  username: jareds_new_todo_project
-  password: <%= ENV["JAREDS_NEW_TODO_PROJECT_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
