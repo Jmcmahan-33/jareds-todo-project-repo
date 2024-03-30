@@ -1,29 +1,34 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { UserProvider } from "./context/user";
+import Home from "./Home";
+// import { Routes } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
-  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
-          </Route>
-          <Route path="/">
-            <h1>Page Count: {count}</h1>
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <UserProvider>
+        <Routes>
+        <Route path="/" element={<Home />} />
+        </Routes>
+      </UserProvider>
+    </div>
+
   );
 }
+export default App
 
-export default App;
+
+// <BrowserRouter>
+//   <div className="App">
+//     <Switch>
+//       <Route path="/testing">
+//         <h1>Test Route</h1>
+//       </Route>
+//       <Route path="/">
+//         <h1>Page Count: {count}</h1>
+//       </Route>
+//     </Switch>
+//   </div>
+// </BrowserRouter>
