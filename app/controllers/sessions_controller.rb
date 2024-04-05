@@ -15,3 +15,6 @@ class SessionsController < ApplicationController
         head :no_content
       end
 end
+# # why I'm getting this error: "error": "Internal Server Error",
+    # "exception": "#<BCrypt::Errors::InvalidHash: invalid hash>",
+    # A:

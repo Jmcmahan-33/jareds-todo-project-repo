@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { UserContext } from "./context/user"
-function Signup () {
+function Signup() {
     const [username, setUserName] = useState("")
     const [password, setPassword] = useState("")
     const [errorsList, setErrorsList] = useState([])
@@ -9,6 +9,10 @@ function Signup () {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // q: why do I get a 404 error when I try to sign up?
+        // A: You are getting a 404 error because the server is not set up to handle a POST request to the /signup route.
+        // Q: How do I fix the 404 error?
+        // A: You need to set up the server to handle a POST request to the /signup route.
         fetch('/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -21,7 +25,7 @@ function Signup () {
             .then(user => {
                 if (!user.errors) {
                     signup(user)
-        
+
                 } else {
                     setUserName("")
                     setPassword("")
@@ -35,17 +39,17 @@ function Signup () {
             <h1>Signup</h1>
             <form onSubmit={handleSubmit}>
                 <input
+                    label="Username"
                     type="username"
-                    placeholder="username"
-                    value={username}
                     id="username"
+                    value={username}
                     onChange={(e) => setUserName(e.target.value)}
                 />
                 <input
+                    label="password"
                     type="password"
-                    placeholder="password"
-                    value={password}
                     id="password"
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Signup</button>
