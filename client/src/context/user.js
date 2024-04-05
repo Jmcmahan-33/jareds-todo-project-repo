@@ -36,9 +36,13 @@ function UserProvider({ children }) {
         setLoggedIn(true)
         setErrors([])
     }
+    const signup = (user) => {
+        setUser(user)
+        setLoggedIn(true)
+    }
 
     return (
-        <UserContext.Provider value={{ login,loggedIn, user, errors }}>
+        <UserContext.Provider value={{ login,signup,loggedIn, user, errors }}>
             {children}
         </UserContext.Provider>
     )
