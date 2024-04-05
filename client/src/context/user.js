@@ -5,8 +5,9 @@ import React, { useState, useEffect } from "react";
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-const [user, setUser] = useState({})
-const [errors, setErrors] = useState([])
+    const [user, setUser] = useState({})
+    const [errors, setErrors] = useState([])
+    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
         fetch("/me")
@@ -15,10 +16,13 @@ const [errors, setErrors] = useState([])
             .then(data => {
                 setUser(data)
                 if (data.errors) {
-                    console.log("ERRORS",data.errors)
+                    console.log("ERRORS", data.errors)
                     setErrors(data.errors)
+                    setLoggedIn(false)
+
                 } else {
                     console.log(data)
+                    setLoggedIn(true)
                 }
             })
     }, [])
@@ -27,8 +31,14 @@ const [errors, setErrors] = useState([])
     // if its not the user, set the error message.
     // other wise set the user to the data.
 
+    const login = (user) => {
+        setUser(user)
+        setLoggedIn(true)
+        setErrors([])
+    }
+
     return (
-        <UserContext.Provider value={{user,errors}}>
+        <UserContext.Provider value={{ login,loggedIn, user, errors }}>
             {children}
         </UserContext.Provider>
     )
